@@ -1,0 +1,50 @@
+on:
+  push:
+    branches:
+      - main
+name: release-please
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          release-type: node
+          package-name: "@aloom-ai/fhir"
+      # The logic below handles the npm publication:
+      - uses: actions/checkout@v3
+        # these if statements ensure that a publication only occurs when
+        # a new release is created:
+        if: ${{ steps.release.outputs.release_created }}
+      - name: Setup the pnpm cache
+        uses: actions/cache@v3
+        with:
+            path: ~/.pnpm-store
+            key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+            restore-keys: |
+                ${{ runner.os }}-
+        if: ${{ steps.release.outputs.release_created }}
+      
+      - uses: actions/setup-node@v3.4.1
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+        if: ${{ steps.release.outputs.release_created }}
+      
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+            version: latest
+            run_install: true
+        if: ${{ steps.release.outputs.release_created }}  
+      
+      
+      - run: pnpm generate
+        if: ${{ steps.release.outputs.release_created }}
+      - run: pnpm build
+        if: ${{ steps.release.outputs.release_created }}
+      - run: pnpm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        if: ${{ steps.release.outputs.release_created }}
