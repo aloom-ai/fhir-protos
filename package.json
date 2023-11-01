@@ -7,21 +7,34 @@
     "README.md",
     "LICENSE"
   ],
+  "type": "module",
   "export": {
-    "r4": "./dist/r4/*.js",
-    "stu3": "./dist/stu3/*.js"
+    ".": {
+      "import": "./dist/r4/index.js",
+      "require": "./dist/r4/index.cjs"
+    },
+    "r4": {
+      "import": "./dist/r4/index.js",
+      "require": "./dist/r4/index.cjs"
+    },
+    "stu3": {
+      "import": "./dist/stu3/index.js",
+      "require": "./dist/stu3/index.cjs"
+    }
   },
   "scripts": {
     "generate": "buf generate --include-imports --path ./proto/google/",
-    "build": "tsc"
+    "create-index": "cti entrypoint ts/proto/google/fhir/proto/r4 --output index.ts && cti entrypoint ts/proto/google/fhir/proto/stu3 --output index.ts",
+    "build": "tsup"
   },
   "author": "Aaron Wirick <aaron@aloom.ai>",
   "repository": "github:aloom-ai/fhir-protos",
   "license": "Apache-2.0",
-
   "devDependencies": {
     "@bufbuild/buf": "^1.27.2",
     "@bufbuild/protoc-gen-es": "^1.4.1",
+    "create-ts-index": "^1.14.0",
+    "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
