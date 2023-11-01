@@ -1,2 +1,5 @@
 # Ignore the bazel symlinks
 /bazel-*
+node_modules/
+.tsbuildinfo
+dist/

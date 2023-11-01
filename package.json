@@ -1,0 +1,35 @@
+{
+  "name": "@aloom-ai/fhir",
+  "version": "0.1.0",
+  "description": "A typescript-friendly fork of the google FHIR protos",
+  "files": [
+    "ts/*",
+    "dist/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "export": {
+    "r4": "./dist/r4/*.js",
+    "stu3": "./dist/stu3/*.js"
+  },
+  "scripts": {
+    "generate": "buf generate --include-imports --path ./proto/google/",
+    "build": "tsc"
+  },
+  "author": "Aaron Wirick <aaron@aloom.ai>",
+  "repository": "github:aloom-ai/fhir-protos",
+  "license": "Apache-2.0",
+
+  "devDependencies": {
+    "@bufbuild/buf": "^1.27.2",
+    "@bufbuild/protoc-gen-es": "^1.4.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "^1.4.1"
+  },
+  "engines": {
+    "pnpm": ">=8.9",
+    "node": ">=20"
+  }
+}
