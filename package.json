@@ -13,11 +13,11 @@
       "import": "./dist/r4/index.js",
       "require": "./dist/r4/index.cjs"
     },
-    "r4": {
+    "./r4": {
       "import": "./dist/r4/index.js",
       "require": "./dist/r4/index.cjs"
     },
-    "stu3": {
+    "./stu3": {
       "import": "./dist/stu3/index.js",
       "require": "./dist/stu3/index.cjs"
     }
