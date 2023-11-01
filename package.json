@@ -8,7 +8,7 @@
     "LICENSE"
   ],
   "type": "module",
-  "export": {
+  "exports": {
     ".": {
       "import": "./dist/r4/index.js",
       "require": "./dist/r4/index.cjs"
