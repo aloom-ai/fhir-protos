@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "A typescript-friendly fork of the google FHIR protos",
   "files": [
-    "ts/*",
     "dist/*",
     "README.md",
     "LICENSE"
