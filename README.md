@@ -1,11 +1,14 @@
-# Introduction
+# FHIR for typescript
 
-FhirProto is Google’s implementation of the [FHIR Standard](http://hl7.org/fhir/) for Health Care data using [Protocol Buffers](https://developers.google.com/protocol-buffers).  By leveraging Google’s core data storage format, FhirProto provides a type-safe, strongly validated FHIR format with cross-language support at a fraction of the size on disk, making it a great data model to develop your Health Care application on.  Structured Codes and Extensions guarantee that your data will be in the correct format.  Support for generating and validating against custom Implementation Guides allow you to customize FhirProto to your dataset and requirements.  Parsing and Printing libraries make it easy to go back and forth between FhirProto format and JSON.
+## Summary
 
-# Getting Started
-We think the best way to get an idea of how FhirProto works is to get in and start playing with it.  To that end, we provide [https://github.com/google/fhir-examples](https://github.com/google/fhir-examples). This repo contains a script for using [Synthea](https://github.com/synthetichealth/synthea) to create a synthetic FHIR JSON dataset, and then shows some examples of parsing, printing, validating, profiling and querying.  The repo also contains a [walkthrough](https://github.com/google/fhir-examples/blob/master/EXAMPLES.md) of many of the examples.
+This is a fork of the [Google FHIR](https://github.com/google/fhir) repository with extensions to build the protos for ecmascript and friends.   In general, it's a 1-for-1
+copy and build using Buf's build tooling.   The only modifications were the exclusions of duplicate exports and creation of index.ts entrypoints for bundling.  Modifications to the rest of the repo are intentionally avoided.   This should facilitate upkeep and allow us to track the upstream fairly closely as new protos emerge (e.g. the upcoming R5 release).
 
-A Reference User Guide with in-depth descriptions of different concepts can be found [here](https://github.com/google/fhir-examples/blob/master/USERGUIDE.md).
+The package is bundled using tsup and should be suitable for consumption by both common and esmodule imports.  We use the typescript "bundler" moduleResolution setting in other aloom-ai projects but assume that other modern imports (e.g., "nodenext") should work as well.  The output is moderately heavy at ~3.7MB packed so you _probably_ want to tree-shake if you intend to use with a browser.  
+
+We may add additional typescript extensions in the future, but only intend to update this repository sparingly.  Feel free to fork and extend as needed.
+
 
 ## Trademark
 FHIR® is the registered trademark of HL7 and is used with the permission of HL7. Use of the FHIR trademark does not constitute endorsement of this product by HL7.
